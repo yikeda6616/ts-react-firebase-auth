@@ -20,9 +20,7 @@ const App: React.FC = () => {
     <div>
       <Router>
         <Navigation />
-
         <hr />
-
         <Route exact path={ROUTES.LANDING} component={Landing} />
         <Route path={ROUTES.SIGN_UP} component={SignUp} />
         <Route path={ROUTES.SIGN_IN} component={SignIn} />
