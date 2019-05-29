@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import Admin from '../Admin';
 import Account from '../Account';
-import Firebase from '../Firebase';
 import Home from '../Home';
 import Landing from '../Landing';
 import Navigation from '../Navigation';
@@ -30,7 +29,6 @@ const App: React.FC = () => {
         <Route path={ROUTES.ADMIN} component={Admin} />
       </Router>
 
-      <Firebase />
       <PasswordChange />
       <Session />
       <SignOut />
