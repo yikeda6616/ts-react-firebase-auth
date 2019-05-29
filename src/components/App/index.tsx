@@ -1,4 +1,6 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import Admin from '../Admin';
 import Account from '../Account';
 import Firebase from '../Firebase';
@@ -15,13 +17,15 @@ import SignUp from '../SignUp';
 const App: React.FC = () => {
   return (
     <div>
-      <h1>App</h1>
+      <Router>
+        <Navigation />
+      </Router>
+
       <Account />
       <Admin />
       <Firebase />
       <Home />
       <Landing />
-      <Navigation />
       <PasswordChange />
       <PasswordForget />
       <Session />
