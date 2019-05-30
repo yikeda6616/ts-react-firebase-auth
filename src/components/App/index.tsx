@@ -13,6 +13,7 @@ import Session from '../Session';
 import SignIn from '../SignIn';
 import SignOut from '../SignOut';
 import SignUp from '../SignUp';
+import { FirebaseContext } from '../Firebase';
 
 const App: React.FC = () => {
   return (
@@ -29,11 +30,20 @@ const App: React.FC = () => {
         <Route path={ROUTES.ADMIN} component={Admin} />
       </Router>
 
+      <SomeComponent />
       <PasswordChange />
       <Session />
       <SignOut />
     </div>
   );
 };
+
+const SomeComponent = () => (
+  <FirebaseContext.Consumer>
+    {firebase => {
+      return <div>I've access to Firebase and render something</div>;
+    }}
+  </FirebaseContext.Consumer>
+);
 
 export default App;
