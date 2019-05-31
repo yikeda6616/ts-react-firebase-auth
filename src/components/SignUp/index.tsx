@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
@@ -11,20 +11,24 @@ const SignUpPage: React.FC = () => (
 );
 
 export const SignUpForm = () => {
-  const INITIAL_STATE = {
-    username: '',
-    email: '',
-    passwordOne: '',
-    passwordTwo: '',
-    error: null
-  };
-
-  const [userInput, setUserInput] = useState(INITIAL_STATE);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [passwordOne, setPasswordOne] = useState('');
+  const [passwordTwo, setPasswordTwo] = useState('');
 
   const onSubmit = (event: any) => {};
 
-  const onChange = (event: any) => {
-    setUserInput({ [event.target.name]: event.target.value });
+  const onUsernameChange = (e: any) => {
+    setUsername(e.target.value);
+  };
+  const onEmailChange = (e: any) => {
+    setEmail(e.target.value);
+  };
+  const onPasswordOneChange = (e: any) => {
+    setPasswordOne(e.target.value);
+  };
+  const onPasswordTwoChange = (e: any) => {
+    setPasswordTwo(e.target.value);
   };
 
   return (
@@ -32,32 +36,32 @@ export const SignUpForm = () => {
       <input
         type='text'
         name='username'
-        value={userInput.username}
-        onChange={() => onChange}
+        value={username}
+        onChange={onUsernameChange}
         placeholder='Full Name'
       />
       <input
         type='text'
-        value={userInput.email}
-        onChange={() => onChange}
+        value={email}
+        onChange={onEmailChange}
         placeholder='Email Address'
       />
       <input
         type='password'
         name='passwordOne'
-        value={userInput.passwordOne}
-        onChange={() => onChange}
+        value={passwordOne}
+        onChange={onPasswordOneChange}
         placeholder='Password'
       />
       <input
         type='password'
         name='passwordTwo'
-        value={userInput.passwordTwo}
-        onChange={() => onChange}
+        value={passwordTwo}
+        onChange={onPasswordTwoChange}
         placeholder='Confirm Password'
       />
       <button type='submit'>Sign Up</button>
-      <p>{userInput.error}</p>
+      {/* <p>{error}</p> */}
     </form>
   );
 };
