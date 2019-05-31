@@ -30,20 +30,11 @@ const App: React.FC = () => {
         <Route path={ROUTES.ADMIN} component={AdminPage} />
       </Router>
 
-      <SomeComponent />
       <PasswordChange />
       <Session />
       <SignOut />
     </div>
   );
 };
-
-const SomeComponent = () => (
-  <FirebaseContext.Consumer>
-    {firebase => {
-      return <div>I've access to Firebase and render something</div>;
-    }}
-  </FirebaseContext.Consumer>
-);
 
 export default App;
