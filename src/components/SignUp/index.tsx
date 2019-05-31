@@ -21,12 +21,10 @@ export const SignUpForm = () => {
 
   const [userInput, setUserInput] = useState(INITIAL_STATE);
 
-  const onSubmit = (event: React.FormEvent<HTMLElement>) => {};
+  const onSubmit = (event: any) => {};
 
-  const onChange = (event: React.FormEvent<HTMLElement>) => {
-    setUserInput(
-      [event.target.name]: event.target.value
-    );
+  const onChange = (event: any) => {
+    setUserInput({ [event.target.name]: event.target.value });
   };
 
   return (
@@ -34,32 +32,32 @@ export const SignUpForm = () => {
       <input
         type='text'
         name='username'
-        value={username}
+        value={userInput.username}
         onChange={() => onChange}
         placeholder='Full Name'
       />
       <input
         type='text'
-        value={email}
+        value={userInput.email}
         onChange={() => onChange}
         placeholder='Email Address'
       />
       <input
         type='password'
         name='passwordOne'
-        value={passwordOne}
+        value={userInput.passwordOne}
         onChange={() => onChange}
         placeholder='Password'
       />
       <input
         type='password'
         name='passwordTwo'
-        value={passwordTwo}
+        value={userInput.passwordTwo}
         onChange={() => onChange}
         placeholder='Confirm Password'
       />
       <button type='submit'>Sign Up</button>
-      {error && <p>{error.message}</p>}
+      <p>{userInput.error}</p>
     </form>
   );
 };
