@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, ReactEventHandler } from 'react';
 import { Link } from 'react-router-dom';
+
 import * as ROUTES from '../../constants/routes';
 
 const SignUpPage: React.FC = () => (
@@ -9,19 +10,40 @@ const SignUpPage: React.FC = () => (
   </div>
 );
 
-interface PropType {}
+interface Props {}
 
-export class SignUpForm extends Component {
-  constructor(props: PropType) {
+interface State {
+  username: string;
+  email: string;
+  passwordOne: string;
+  passwordTwo: string;
+  error: null | string;
+}
+
+const INITIAL_STATE: State = {
+  username: '',
+  email: '',
+  passwordOne: '',
+  passwordTwo: '',
+  error: null
+};
+
+export class SignUpForm extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
+    this.state = { ...INITIAL_STATE };
   }
 
-  onSubmit = (event: React.FormEvent<HTMLElement>): void => {};
+  onSubmit = (event: React.FormEvent<HTMLElement>) => {};
 
-  onChange = (event: React.FormEvent<HTMLElement>): void => {};
+  onChange = (event: React.FormEvent<HTMLElement>) => {};
 
-  redner() {
-    return <form onSubmit={this.onSubmit} />;
+  render() {
+    return (
+      <form onSubmit={this.onSubmit}>
+        <p />
+      </form>
+    );
   }
 }
 
