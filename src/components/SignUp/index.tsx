@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
@@ -10,74 +10,61 @@ const SignUpPage: React.FC = () => (
   </div>
 );
 
-interface Props {}
+export const SignUpForm = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [passwordOne, setPasswordOne] = useState('');
+  const [passwordTwo, setPasswordTwo] = useState('');
 
-interface State {
-  username: string;
-  email: string;
-  passwordOne: string;
-  passwordTwo: string;
-  error: any;
-}
+  const onSubmit = (event: any) => {};
 
-const INITIAL_STATE: State = {
-  username: '',
-  email: '',
-  passwordOne: '',
-  passwordTwo: '',
-  error: null
-};
-
-export class SignUpForm extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { ...INITIAL_STATE };
-  }
-
-  onSubmit = (event: React.FormEvent<HTMLElement>) => {};
-
-  onChange = (event: React.FormEvent<HTMLElement>) => {
-    this.setState({ [event.target.name]: event.target.value });
+  const onUsernameChange = (e: any) => {
+    setUsername(e.target.value);
+  };
+  const onEmailChange = (e: any) => {
+    setEmail(e.target.value);
+  };
+  const onPasswordOneChange = (e: any) => {
+    setPasswordOne(e.target.value);
+  };
+  const onPasswordTwoChange = (e: any) => {
+    setPasswordTwo(e.target.value);
   };
 
-  render() {
-    const { username, email, passwordOne, passwordTwo, error } = this.state;
-
-    return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          type='text'
-          name='username'
-          value={username}
-          onChange={this.onChange}
-          placeholder='Full Name'
-        />
-        <input
-          type='text'
-          value={email}
-          onChange={this.onChange}
-          placeholder='Email Address'
-        />
-        <input
-          type='password'
-          name='passwordOne'
-          value={passwordOne}
-          onChange={this.onChange}
-          placeholder='Password'
-        />
-        <input
-          type='password'
-          name='passwordTwo'
-          value={passwordTwo}
-          onChange={this.onChange}
-          placeholder='Confirm Password'
-        />
-        <button type='submit'>Sign Up</button>
-        {error && <p>{error.message}</p>}
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={() => onSubmit}>
+      <input
+        type='text'
+        name='username'
+        value={username}
+        onChange={onUsernameChange}
+        placeholder='Full Name'
+      />
+      <input
+        type='text'
+        value={email}
+        onChange={onEmailChange}
+        placeholder='Email Address'
+      />
+      <input
+        type='password'
+        name='passwordOne'
+        value={passwordOne}
+        onChange={onPasswordOneChange}
+        placeholder='Password'
+      />
+      <input
+        type='password'
+        name='passwordTwo'
+        value={passwordTwo}
+        onChange={onPasswordTwoChange}
+        placeholder='Confirm Password'
+      />
+      <button type='submit'>Sign Up</button>
+      {/* <p>{error}</p> */}
+    </form>
+  );
+};
 
 export const SignUpLink: React.FC = () => (
   <p>
