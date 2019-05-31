@@ -17,7 +17,7 @@ interface State {
   email: string;
   passwordOne: string;
   passwordTwo: string;
-  error: null | string;
+  error: any;
 }
 
 const INITIAL_STATE: State = {
@@ -39,9 +39,39 @@ export class SignUpForm extends Component<Props, State> {
   onChange = (event: React.FormEvent<HTMLElement>) => {};
 
   render() {
+    const { username, email, passwordOne, passwordTwo, error } = this.state;
+
     return (
       <form onSubmit={this.onSubmit}>
-        <p />
+        <input
+          type='text'
+          name='username'
+          value={username}
+          onChange={this.onChange}
+          placeholder='Full Name'
+        />
+        <input
+          type='text'
+          value={email}
+          onChange={this.onChange}
+          placeholder='Email Address'
+        />
+        <input
+          type='password'
+          name='passwordOne'
+          value={passwordOne}
+          onChange={this.onChange}
+          placeholder='Password'
+        />
+        <input
+          type='password'
+          name='passwordTwo'
+          value={passwordTwo}
+          onChange={this.onChange}
+          placeholder='Confirm Password'
+        />
+        <button type='submit'>Sign Up</button>
+        {error && <p>{error.message}</p>}
       </form>
     );
   }
