@@ -1,4 +1,4 @@
-import React, { Component, ReactEventHandler } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
@@ -36,7 +36,9 @@ export class SignUpForm extends Component<Props, State> {
 
   onSubmit = (event: React.FormEvent<HTMLElement>) => {};
 
-  onChange = (event: React.FormEvent<HTMLElement>) => {};
+  onChange = (event: React.FormEvent<HTMLElement>) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   render() {
     const { username, email, passwordOne, passwordTwo, error } = this.state;
