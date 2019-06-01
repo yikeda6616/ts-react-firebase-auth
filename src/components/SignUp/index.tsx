@@ -10,58 +10,58 @@ const SignUpPage: React.FC = () => (
   </div>
 );
 
+const INITIAL_STATE = {
+  username: '',
+  email: '',
+  passwordOne: '',
+  passwordTwo: ''
+};
+
 export const SignUpForm = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [passwordOne, setPasswordOne] = useState('');
-  const [passwordTwo, setPasswordTwo] = useState('');
+  const [userInput, setUserInput] = useState(INITIAL_STATE);
 
-  const onSubmit = (event: any) => {};
+  const onSubmit = (e: any) => {
+    console.log(userInput);
+  };
 
-  const onUsernameChange = (e: any) => {
-    setUsername(e.target.value);
-  };
-  const onEmailChange = (e: any) => {
-    setEmail(e.target.value);
-  };
-  const onPasswordOneChange = (e: any) => {
-    setPasswordOne(e.target.value);
-  };
-  const onPasswordTwoChange = (e: any) => {
-    setPasswordTwo(e.target.value);
+  const onUserInputChange = (e: any) => {
+    setUserInput({ ...userInput, [e.target.name]: e.target.value } as any);
   };
 
   return (
-    <form onSubmit={() => onSubmit}>
+    <form onSubmit={onSubmit}>
       <input
         type='text'
         name='username'
-        value={username}
-        onChange={onUsernameChange}
+        value={userInput.username}
+        onChange={onUserInputChange}
         placeholder='Full Name'
       />
       <input
         type='text'
-        value={email}
-        onChange={onEmailChange}
+        name='email'
+        value={userInput.email}
+        onChange={onUserInputChange}
         placeholder='Email Address'
       />
       <input
         type='password'
         name='passwordOne'
-        value={passwordOne}
-        onChange={onPasswordOneChange}
+        value={userInput.passwordOne}
+        onChange={onUserInputChange}
         placeholder='Password'
       />
       <input
         type='password'
         name='passwordTwo'
-        value={passwordTwo}
-        onChange={onPasswordTwoChange}
+        value={userInput.passwordTwo}
+        onChange={onUserInputChange}
         placeholder='Confirm Password'
       />
-      <button type='submit'>Sign Up</button>
-      {/* <p>{error}</p> */}
+      <p onClick={onSubmit}>test</p>
+      <button type='submit' onSubmit={onSubmit}>
+        Sign Up
+      </button>
     </form>
   );
 };
