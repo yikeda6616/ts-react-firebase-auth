@@ -35,7 +35,7 @@ export const SignUpForm = (props: any) => {
       })
       // If the request is rejected, set the error object in the local state.
       .catch((error: any) => {
-        setUserInput({ ...userInput, error: error });
+        setUserInput({ ...userInput, [error]: error });
       });
 
     e.preventDefault();
