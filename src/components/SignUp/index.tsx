@@ -22,48 +22,56 @@ export const SignUpForm = () => {
   const [userInput, setUserInput] = useState(INITIAL_STATE);
 
   const onSubmit = (e: any) => {
-    console.log(userInput);
+    console.log(username, email, passwordOne, passwordTwo, error);
   };
 
   const onUserInputChange = (e: any) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
   };
 
+  const { username, email, passwordOne, passwordTwo, error } = userInput;
+
+  const isInvalid =
+    passwordOne !== passwordTwo ||
+    passwordOne === '' ||
+    email === '' ||
+    username === '';
+
   return (
     <form onSubmit={onSubmit}>
       <input
         type='text'
         name='username'
-        value={userInput.username}
+        value={username}
         onChange={onUserInputChange}
         placeholder='Full Name'
       />
       <input
         type='text'
         name='email'
-        value={userInput.email}
+        value={email}
         onChange={onUserInputChange}
         placeholder='Email Address'
       />
       <input
         type='password'
         name='passwordOne'
-        value={userInput.passwordOne}
+        value={passwordOne}
         onChange={onUserInputChange}
         placeholder='Password'
       />
       <input
         type='password'
         name='passwordTwo'
-        value={userInput.passwordTwo}
+        value={passwordTwo}
         onChange={onUserInputChange}
         placeholder='Confirm Password'
       />
       <p onClick={onSubmit}>test</p>
-      <button type='submit' onSubmit={onSubmit}>
+      <button disabled={isInvalid} type='submit' onSubmit={onSubmit}>
         Sign Up
       </button>
-      {userInput.error && <p>{userInput.error}</p>}
+      {error && <p>{error}</p>}
     </form>
   );
 };
