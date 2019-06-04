@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 
 import { FirebaseContext } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -21,11 +22,12 @@ const INITIAL_STATE = {
   error: null
 };
 
-export const SignUpForm = (props: any) => {
+export const SignUpFormBase = (props: any) => {
   const [userInput, setUserInput] = useState(INITIAL_STATE);
 
   const onSubmit = (e: any) => {
     const { username, email, passwordOne } = userInput;
+    props.history.push(ROUTES.HOME);
     props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
 
@@ -33,7 +35,6 @@ export const SignUpForm = (props: any) => {
       .then((authUser: any) => {
         setUserInput({ ...INITIAL_STATE });
         // Redirect the user to another page, a protected route for only authenticated users.
-        props.history.push(ROUTES.HOME);
       })
       // If the request is rejected, set the error object in the local state.
       .catch((error: any) => {
@@ -85,14 +86,15 @@ export const SignUpForm = (props: any) => {
         onChange={onUserInputChange}
         placeholder='Confirm Password'
       />
-      <p onClick={onSubmit}>test</p>
-      <button disabled={isInvalid} type='submit' onSubmit={onSubmit}>
+      <button disabled={isInvalid} type='submit'>
         Sign Up
       </button>
       {error && <p>{error}</p>}
     </form>
   );
 };
+
+const SignUpForm = compose(withRouter)(SignUpFormBase);
 
 export const SignUpLink: React.FC = () => (
   <p>
