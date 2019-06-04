@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { FirebaseContext } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
 const SignUpPage: React.FC = () => (
   <div>
     <h1>SignUp</h1>
-    <SignUpForm />
+    <FirebaseContext.Consumer>
+      {firebase => <SignUpForm firebase={firebase} />}
+    </FirebaseContext.Consumer>
   </div>
 );
 
@@ -18,11 +21,24 @@ const INITIAL_STATE = {
   error: null
 };
 
-export const SignUpForm = () => {
+export const SignUpForm = (props: any) => {
   const [userInput, setUserInput] = useState(INITIAL_STATE);
 
   const onSubmit = (e: any) => {
-    console.log(username, email, passwordOne, passwordTwo, error);
+    const { username, email, passwordOne } = userInput;
+    props.firebase
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+
+      // If the request resolves successfully, set local state of the component to its initial state to empty the input fields.
+      .then((authUser: any) => {
+        setUserInput({ ...INITIAL_STATE });
+      })
+      // If the request is rejected, set the error object in the local state.
+      .catch((error: any) => {
+        setUserInput({ ...userInput, error: error });
+      });
+
+    e.preventDefault();
   };
 
   const onUserInputChange = (e: any) => {
