@@ -32,6 +32,8 @@ export const SignUpForm = (props: any) => {
       // If the request resolves successfully, set local state of the component to its initial state to empty the input fields.
       .then((authUser: any) => {
         setUserInput({ ...INITIAL_STATE });
+        // Redirect the user to another page, a protected route for only authenticated users.
+        props.history.push(ROUTES.HOME);
       })
       // If the request is rejected, set the error object in the local state.
       .catch((error: any) => {
