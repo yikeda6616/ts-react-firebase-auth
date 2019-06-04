@@ -14,7 +14,8 @@ const INITIAL_STATE = {
   username: '',
   email: '',
   passwordOne: '',
-  passwordTwo: ''
+  passwordTwo: '',
+  error: null
 };
 
 export const SignUpForm = () => {
@@ -25,7 +26,7 @@ export const SignUpForm = () => {
   };
 
   const onUserInputChange = (e: any) => {
-    setUserInput({ ...userInput, [e.target.name]: e.target.value } as any);
+    setUserInput({ ...userInput, [e.target.name]: e.target.value });
   };
 
   return (
@@ -62,6 +63,7 @@ export const SignUpForm = () => {
       <button type='submit' onSubmit={onSubmit}>
         Sign Up
       </button>
+      {userInput.error && <p>{userInput.error}</p>}
     </form>
   );
 };
