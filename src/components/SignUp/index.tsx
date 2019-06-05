@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
 
 import { FirebaseContext } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-const SignUpPage: React.FC = () => (
+const SignUpPage: React.FC = (props: any) => (
   <div>
     <h1>SignUp</h1>
     <FirebaseContext.Consumer>
-      {firebase => <SignUpForm firebase={firebase} />}
+      {firebase => <SignUpForm firebase={firebase} history={props.history} />}
     </FirebaseContext.Consumer>
   </div>
 );
@@ -18,27 +17,27 @@ const INITIAL_STATE = {
   username: '',
   email: '',
   passwordOne: '',
-  passwordTwo: '',
-  error: null
+  passwordTwo: ''
 };
 
-export const SignUpFormBase = (props: any) => {
+const SignUpForm = (props: any) => {
   const [userInput, setUserInput] = useState(INITIAL_STATE);
+  const [error, setError] = useState('');
 
   const onSubmit = (e: any) => {
     const { username, email, passwordOne } = userInput;
-    props.history.push(ROUTES.HOME);
+
     props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
-
       // If the request resolves successfully, set local state of the component to its initial state to empty the input fields.
       .then((authUser: any) => {
         setUserInput({ ...INITIAL_STATE });
         // Redirect the user to another page, a protected route for only authenticated users.
+        props.history.push(ROUTES.HOME);
       })
       // If the request is rejected, set the error object in the local state.
       .catch((error: any) => {
-        setUserInput({ ...userInput, [error]: error });
+        setError(error.message);
       });
 
     e.preventDefault();
@@ -48,7 +47,7 @@ export const SignUpFormBase = (props: any) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
   };
 
-  const { username, email, passwordOne, passwordTwo, error } = userInput;
+  const { username, email, passwordOne, passwordTwo } = userInput;
 
   const isInvalid =
     passwordOne !== passwordTwo ||
@@ -89,12 +88,10 @@ export const SignUpFormBase = (props: any) => {
       <button disabled={isInvalid} type='submit'>
         Sign Up
       </button>
-      {error && <p>{error}</p>}
+      {error && <p className='error'>{error}</p>}
     </form>
   );
 };
-
-const SignUpForm = compose(withRouter)(SignUpFormBase);
 
 export const SignUpLink: React.FC = () => (
   <p>
@@ -102,4 +99,4 @@ export const SignUpLink: React.FC = () => (
   </p>
 );
 
-export default SignUpPage;
+export default withRouter(SignUpPage);
