@@ -11,9 +11,7 @@ import PasswordChange from '../PasswordChange';
 import PasswordForgetPage from '../PasswordForget';
 import Session from '../Session';
 import SignInPage from '../SignIn';
-import SignOut from '../SignOut';
 import SignUpPage from '../SignUp';
-import { FirebaseContext } from '../Firebase';
 
 const App: React.FC = () => {
   return (
@@ -32,7 +30,6 @@ const App: React.FC = () => {
 
       <PasswordChange />
       <Session />
-      <SignOut />
     </div>
   );
 };
