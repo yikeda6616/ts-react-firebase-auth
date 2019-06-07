@@ -43,7 +43,7 @@ const SignUpForm = (props: any) => {
     e.preventDefault();
   };
 
-  const onUserInputChange = (e: any) => {
+  const onChange = (e: any) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
   };
 
@@ -61,28 +61,28 @@ const SignUpForm = (props: any) => {
         type='text'
         name='username'
         value={username}
-        onChange={onUserInputChange}
+        onChange={onChange}
         placeholder='Full Name'
       />
       <input
         type='text'
         name='email'
         value={email}
-        onChange={onUserInputChange}
+        onChange={onChange}
         placeholder='Email Address'
       />
       <input
         type='password'
         name='passwordOne'
         value={passwordOne}
-        onChange={onUserInputChange}
+        onChange={onChange}
         placeholder='Password'
       />
       <input
         type='password'
         name='passwordTwo'
         value={passwordTwo}
-        onChange={onUserInputChange}
+        onChange={onChange}
         placeholder='Confirm Password'
       />
       <button disabled={isInvalid} type='submit'>
