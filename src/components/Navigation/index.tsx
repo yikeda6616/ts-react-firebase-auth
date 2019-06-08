@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 
-const Navigation: React.FC = () => (
+const Navigation = (props: any) => (
   <div>
     <ul>
       <li>

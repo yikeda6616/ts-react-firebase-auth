@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
@@ -13,11 +13,13 @@ import Session from '../Session';
 import SignInPage from '../SignIn';
 import SignUpPage from '../SignUp';
 
-const App: React.FC = () => {
+const App: React.FC = (props: any) => {
+  const [authUser, setAuthUser] = useState(null);
+
   return (
     <div>
       <Router>
-        <Navigation />
+        <Navigation authUser={authUser} />
         <hr />
         <Route exact path={ROUTES.LANDING} component={LandingPage} />
         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
