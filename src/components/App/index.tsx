@@ -25,7 +25,6 @@ const AppBase: React.FC = (props: any) => {
 
   useEffect(() => {
     props.firebase.auth.onAuthStateChanged((authUser: any) => {
-      console.log('onAuthStateChanged'); // TODO: Delete this
       authUser ? setAuthUser({ authUser } as any) : setAuthUser(null);
     });
     return () => {};
