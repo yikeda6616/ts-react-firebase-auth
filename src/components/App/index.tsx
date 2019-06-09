@@ -11,16 +11,10 @@ import PasswordForgetPage from '../PasswordForget';
 import { AuthUserContext } from '../Session';
 import SignInPage from '../SignIn';
 import SignUpPage from '../SignUp';
-import { FirebaseContext } from '../Firebase';
+import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-const App = (props: any) => (
-  <FirebaseContext.Consumer>
-    {firebase => <AppBase {...props} firebase={firebase} />}
-  </FirebaseContext.Consumer>
-);
-
-const AppBase: React.FC = (props: any) => {
+const App: React.FC = (props: any) => {
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
@@ -54,4 +48,4 @@ const AppBase: React.FC = (props: any) => {
   );
 };
 
-export default App;
+export default withFirebase(App);
