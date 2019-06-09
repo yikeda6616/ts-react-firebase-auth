@@ -23,14 +23,15 @@ const App = (props: any) => (
 const AppBase: React.FC = (props: any) => {
   const [authUser, setAuthUser] = useState(null);
 
-  // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     props.firebase.auth.onAuthStateChanged((authUser: any) => {
+      console.log('onAuthStateChanged');
       authUser
         ? setAuthUser({ authUser } as any)
         : setAuthUser({ authUser: null } as any);
     });
-  });
+    return () => {};
+  }, []);
 
   return (
     <Router {...props}>
