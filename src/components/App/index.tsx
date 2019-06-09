@@ -34,7 +34,7 @@ const AppBase: React.FC = (props: any) => {
   }, []);
 
   return (
-    <Router {...props}>
+    <Router>
       <Navigation authUser={authUser} />
       <hr />
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
