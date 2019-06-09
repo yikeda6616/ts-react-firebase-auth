@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-const SignUpPage: React.FC = (props: any) => (
+const SignUpPage: React.FC = () => (
   <div>
     <h1>SignUp</h1>
     <SignUpForm />

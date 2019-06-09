@@ -6,7 +6,7 @@ import { withFirebase } from '../Firebase';
 import { SignUpLink } from '../SignUp';
 import * as ROUTES from '../../constants/routes';
 
-const SignInPage: React.FC = (props: any) => (
+const SignInPage: React.FC = () => (
   <div>
     <h1>SignIn</h1>
     <SignInForm />
