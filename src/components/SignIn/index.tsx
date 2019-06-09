@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
+import { compose } from 'recompose';
 
-import { FirebaseContext } from '../Firebase';
+import { withFirebase } from '../Firebase';
 import { SignUpLink } from '../SignUp';
 import * as ROUTES from '../../constants/routes';
 
 const SignInPage: React.FC = (props: any) => (
   <div>
     <h1>SignIn</h1>
-    <FirebaseContext.Consumer>
-      {firebase => <SignInForm firebase={firebase} history={props.history} />}
-    </FirebaseContext.Consumer>
+    <SignInForm />
     <SignUpLink />
   </div>
 );
@@ -20,7 +19,7 @@ const INITIAL_STATE = {
   password: ''
 };
 
-const SignInForm = (props: any) => {
+const SignInFormBase = (props: any) => {
   const [userInput, setUserInput] = useState(INITIAL_STATE);
   const [error, setError] = useState('');
 
@@ -71,4 +70,9 @@ const SignInForm = (props: any) => {
   );
 };
 
-export default withRouter(SignInPage);
+const SignInForm = compose(
+  withRouter,
+  withFirebase
+)(SignInFormBase);
+
+export default SignInPage;
