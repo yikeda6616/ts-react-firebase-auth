@@ -6,7 +6,6 @@ import AccountPage from '../Account';
 import HomePage from '../Home';
 import LandingPage from '../Landing';
 import Navigation from '../Navigation';
-import PasswordChange from '../PasswordChange';
 import PasswordForgetPage from '../PasswordForget';
 import { AuthUserContext, useAuthentication } from '../Session';
 import SignInPage from '../SignIn';
@@ -30,7 +29,6 @@ const App: React.FC = (props: any) => {
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
         <Route path={ROUTES.ADMIN} component={AdminPage} />
       </Router>
-      {/* <PasswordChange /> */}
     </AuthUserContext.Provider>
   );
 };
