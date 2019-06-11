@@ -24,7 +24,7 @@ const PasswordForgetFormBase = (props: any) => {
         setEmail('');
       })
       .catch((error: any) => {
-        setError({ error } as any);
+        setError(error.message);
       });
     e.preventDefault();
   };
